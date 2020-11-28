@@ -6,13 +6,12 @@ CREATE TABLE [dbo].[t_specday](
 	[c_date] [date] NOT NULL,
 	[c_holiday] [bit] NOT NULL,
 	CONSTRAINT [PK_specday_id] 
-		PRIMARY KEY CLUSTERED ([c_id] ASC)
+	PRIMARY KEY CLUSTERED ([c_id] ASC)
 )
 
 ALTER TABLE [dbo].[t_specday] 
-	ADD CONSTRAINT [UQ_specday_holiday]
-		UNIQUE NONCLUSTERED ([c_date] ASC)
-
+	ADD CONSTRAINT [UQ_specday_holiday] 
+	UNIQUE NONCLUSTERED ([c_date] ASC)
 
 CREATE FUNCTION [dbo].[is_holiday] (@p_date DATE)
 RETURNS BIT AS BEGIN	
@@ -24,5 +23,3 @@ RETURNS BIT AS BEGIN
 	IF @v_tmp = 1 SELECT @v_oup = c_holiday FROM t_specday WHERE c_date = @p_date
 	RETURN @v_oup
 END
-
-
